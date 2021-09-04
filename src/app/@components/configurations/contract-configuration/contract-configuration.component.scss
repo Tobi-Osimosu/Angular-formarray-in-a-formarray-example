@@ -1,0 +1,213 @@
+#contract-configuration {
+  padding-top: 30px;
+
+  .header {
+    font-size: 24px;
+    font-weight: 600;
+    color: var(--variation1);
+    margin-bottom: 30px;
+  }
+
+  .add-contract-type-btn {
+    font-size: 16px;
+    font-weight: 700;
+    text-decoration: none;
+    box-shadow: none;
+    border: none;
+    border-radius: 5px;
+    background: var(--primary-color);
+    color: #ffffff;
+    padding: 5px 20px;
+  }
+
+  .card-section {
+    background: #ffffff;
+    border: 1px solid rgba(152, 157, 179, 0.2);
+    border-radius: 8px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    margin-top: 15px;
+  }
+
+  .card-section-header {
+    font-size: 14px;
+    font-weight: 700;
+  }
+
+  .search-icon {
+    width: 15px;
+  }
+
+  ::ng-deep .mat-form-field-flex:hover {
+    .search-icon {
+      & > path {
+        fill: rgba(0, 0, 0, 0.87);
+      }
+    }
+  }
+
+  ::ng-deep .mat-focused {
+    .search-icon {
+      & > path {
+        fill: var(--primary-color) !important;
+      }
+    }
+  }
+
+  ::ng-deep .mat-form-field-flex {
+    align-items: center;
+    margin-top: unset;
+  }
+
+  ::ng-deep .mat-form-field-flex > .mat-form-field-infix {
+    padding: 0.5em 0;
+    border-top: unset;
+  }
+
+  .search {
+    ::ng-deep .mat-form-field {
+      line-height: inherit;
+      width: 100%;
+    }
+  }
+
+  .search {
+    ::ng-deep .mat-form-field-wrapper {
+      margin: unset;
+      padding-bottom: unset;
+    }
+  }
+
+  /* Centering and adding padding the search prefix icon*/
+  ::ng-deep .mat-form-field-appearance-outline .mat-form-field-prefix {
+    top: 0.05em;
+    margin-right: 10px;
+  }
+
+  /* Change the white to any color ;) */
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus,
+  input:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 30px var(--general) inset !important;
+    -webkit-transition: "color 9999s ease-out, background-color 9999s ease-out";
+    -webkit-transition-delay: 9999s;
+  }
+
+  /* Change font-size and font family of input when autocomplete kicks in*/
+  input:-webkit-autofill::first-line {
+    font-size: 13px;
+  }
+
+  input {
+    text-overflow: ellipsis;
+    font-size: 13px;
+  }
+
+  table {
+    width: 100%;
+    margin-top: 15px;
+  }
+
+  td,
+  th {
+    white-space: nowrap;
+    padding-right: 25px;
+  }
+
+  td {
+    color: var(--variation3);
+    font-size: 12px;
+  }
+
+  td.mat-cell {
+    border-bottom-color: rgba(209, 216, 245, 0.6);
+  }
+
+  th.mat-header-cell {
+    border: none;
+  }
+
+  ::ng-deep thead {
+    background: rgba(175, 88, 42, 0.1);
+  }
+
+  ::ng-deep tr.mat-header-row {
+    height: 45px;
+  }
+
+  ::ng-deep .mat-sort-header-content {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--variation3);
+  }
+
+  // Sort arrow color
+  ::ng-deep .mat-sort-header-arrow {
+    color: var(--primary-color);
+  }
+
+  .profile-picture {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    background: #333333;
+    margin-right: 8px;
+    overflow: hidden;
+  }
+
+  .status {
+    display: flex;
+    justify-content: center;
+    border-radius: 2px;
+    width: 85px;
+    padding: 2px 20px;
+    font-weight: 600;
+
+    &.active {
+      background: rgba(31, 211, 138, 0.1);
+      color: #1fd38a;
+    }
+
+    &.inactive,
+    &.deactivated,
+    &.deleted {
+      background: rgba(247, 75, 85, 0.1);
+      color: #f74b55;
+    }
+  }
+
+  .table-cta-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+  }
+
+  .table-cta {
+    // stroke: var(--text1-color);
+  }
+
+  ::ng-deep
+    .mat-slide-toggle.mat-checked:not(.mat-disabled)
+    .mat-slide-toggle-thumb {
+    background-color: #ffffff;
+  }
+
+  ::ng-deep
+    .mat-slide-toggle.mat-checked:not(.mat-disabled)
+    .mat-slide-toggle-bar {
+    background-color: #57c126;
+  }
+}
+
+::ng-deep .custom-tooltip {
+  background: #333333 !important;
+  color: #ffffff !important;
+  font-size: 11px !important;
+}

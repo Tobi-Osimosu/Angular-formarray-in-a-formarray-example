@@ -1,0 +1,153 @@
+<aside>
+  <section #sidebar id="sidebar">
+    <div class="brand">
+      <a routerLink="/">
+        <img
+          src="/assets/images/dashboard-brand.png"
+          alt=""
+          class="img-fluid"
+        />
+      </a>
+    </div>
+    <ul>
+      <a
+        matRipple
+        routerLink="/dashboard"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }"
+        class="mb-4"
+      >
+        <div class="d-flex align-items-center">
+          <svg
+            class="img-fluid icon"
+            width="26"
+            height="26"
+            viewBox="0 0 26 26"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            style="transform: rotate(180deg)"
+          >
+            <path
+              d="M10.9988 12.9762L18.9982 13.0719"
+              stroke="white"
+              stroke-linecap="round"
+            />
+            <path
+              d="M17.0342 10.0482L19.9981 13.0838L16.9624 16.0477"
+              stroke="white"
+              stroke-linecap="round"
+            />
+            <path
+              d="M12.082 5.98865L7.08239 5.92883L6.91491 19.9278L11.9146 19.9876"
+              stroke="white"
+              stroke-linecap="round"
+            />
+          </svg>
+
+          <li>Back To Main Module</li>
+        </div>
+      </a>
+
+      <a #dropdown1 matRipple (click)="toggleDropdown(dropdown1, 1)">
+        <div class="d-flex align-items-center">
+          <svg
+            class="img-fluid icon"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path d="M17 6L17 18" stroke="white" stroke-linecap="round" />
+            <path d="M12 6L12 18" stroke="white" stroke-linecap="round" />
+            <path d="M7 6L7 18" stroke="white" stroke-linecap="round" />
+            <path d="M5 8H9" stroke="white" stroke-linecap="round" />
+            <path d="M10 16H14" stroke="white" stroke-linecap="round" />
+            <path d="M15 12H19" stroke="white" stroke-linecap="round" />
+          </svg>
+
+          <li>Configurations</li>
+        </div>
+        <div class="caret-container">
+          <svg
+            class="img-fluid caret"
+            width="8"
+            height="15"
+            viewBox="0 0 8 15"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M6.2927 5.63624L1.7037 1.05024C1.51329 0.878079 1.26397 0.785733 1.00736 0.792322C0.750745 0.798911 0.506493 0.903931 0.325172 1.08564C0.143852 1.26734 0.0393515 1.51182 0.0333071 1.76845C0.0272628 2.02507 0.120137 2.2742 0.292702 2.46424L4.8787 7.05024C5.06617 7.23777 5.17149 7.49207 5.17149 7.75724C5.17149 8.0224 5.06617 8.27671 4.8787 8.46424L0.292702 13.0502C0.105194 13.2379 -9.37084e-05 13.4923 6.2582e-08 13.7576C9.38336e-05 14.0229 0.105562 14.2772 0.293202 14.4647C0.480843 14.6522 0.735286 14.7575 1.00056 14.7574C1.26583 14.7573 1.52019 14.6519 1.7077 14.4642L6.2927 9.87824C6.85511 9.31566 7.17106 8.55273 7.17106 7.75724C7.17106 6.96175 6.85511 6.19882 6.2927 5.63624Z"
+              fill="#ffffff"
+            />
+          </svg>
+        </div>
+      </a>
+      <div [@dropdown]="dropdownAnimationState1" class="dropdown">
+        <a
+          routerLink="/dashboard/product-configuration"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }"
+          matRipple
+          class="pl-5"
+        >
+          <div class="d-flex align-items-center">
+            <svg
+              class="img-fluid icon"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path d="M17 6L17 18" stroke="white" stroke-linecap="round" />
+              <path d="M12 6L12 18" stroke="white" stroke-linecap="round" />
+              <path d="M7 6L7 18" stroke="white" stroke-linecap="round" />
+              <path d="M5 8H9" stroke="white" stroke-linecap="round" />
+              <path d="M10 16H14" stroke="white" stroke-linecap="round" />
+              <path d="M15 12H19" stroke="white" stroke-linecap="round" />
+            </svg>
+            <li>Product</li>
+          </div>
+        </a>
+        <a
+          routerLink="/dashboard/contract-configuration"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }"
+          matRipple
+          class="pl-5"
+        >
+          <div class="d-flex align-items-center">
+            <svg
+              class="img-fluid icon"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path d="M17 6L17 18" stroke="white" stroke-linecap="round" />
+              <path d="M12 6L12 18" stroke="white" stroke-linecap="round" />
+              <path d="M7 6L7 18" stroke="white" stroke-linecap="round" />
+              <path d="M5 8H9" stroke="white" stroke-linecap="round" />
+              <path d="M10 16H14" stroke="white" stroke-linecap="round" />
+              <path d="M15 12H19" stroke="white" stroke-linecap="round" />
+            </svg>
+            <li>Contract</li>
+          </div>
+        </a>
+        <!-- <a
+            routerLink="/dashboard/organization-list"
+            routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: true }"
+            matRipple
+          >
+            <div class="d-flex align-items-center">
+              <li>Organization List</li>
+            </div>
+          </a> -->
+      </div>
+    </ul>
+  </section>
+</aside>

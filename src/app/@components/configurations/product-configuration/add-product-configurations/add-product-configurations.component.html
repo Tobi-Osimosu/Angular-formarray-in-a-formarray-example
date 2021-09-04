@@ -1,0 +1,158 @@
+<mat-dialog-content>
+  <section id="add-product-configuration">
+    <div class="container">
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <h5 class="header">Product/Service type</h5>
+        <div class="close-container" matRipple (click)="closeDialog()">
+          <div class="line1"></div>
+          <div class="line2"></div>
+        </div>
+      </div>
+      <form [formGroup]="addProductConfigurationsForm" (ngSubmit)="onSubmit()">
+        <div
+          formArrayName="product_configuration"
+          *ngFor="
+            let product-configuration of addProductConfigurationsForm.get(
+              'product_configuration'
+            )['controls'];
+            let i = index
+          "
+        >
+          <div [formGroupName]="i">
+            <div class="form-row">
+              <div class="col-12 col-md-6">
+                <div class="form-group">
+                  <mat-form-field appearance="outline" [style.width.%]="100">
+                    <mat-label>Audit ({{ i + 1 }})</mat-label>
+                    <input type="text" matInput formControlName="audit" />
+                    <mat-error
+                      *ngIf="
+                        productConfigurationArray.controls[i].get('audit')
+                          .errors?.required
+                      "
+                    >
+                      Please enter audit
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="col-12 col-md-6">
+                <div class="form-group d-flex">
+                  <mat-form-field
+                    appearance="outline"
+                    [style.width.%]="90"
+                  >
+                    <mat-label>Vendor Type ({{ i + 1 }})</mat-label>
+                    <mat-select formControlName="vendor_type">
+                      <!-- <ng-container
+                        *ngIf="
+                          (allRegions | async) !== null &&
+                            (allRegions | async).length !== 0;
+                          else noRegion
+                        "
+                      >
+                        <ng-container
+                          *ngFor="
+                            let region of allRegions | async;
+                            let i = index
+                          "
+                        >
+                          <ng-container
+                            *ngIf="region.status === 0; else noRegion"
+                          >
+                            <mat-option [value]="region.id">
+                              {{ region.name }}
+                            </mat-option>
+                          </ng-container>
+                        </ng-container>
+                      </ng-container>
+                      <ng-template #noRegion>
+                        <mat-option disabled>No Region</mat-option>
+                      </ng-template> -->
+                      <mat-option value="Something">Something</mat-option>
+                      <mat-option value="Something">Something</mat-option>
+                      <mat-option value="Something">Something</mat-option>
+                      <mat-option value="Something">Something</mat-option>
+                    </mat-select>
+                    <mat-error
+                      *ngIf="
+                        productConfigurationArray.controls[i].get('vendor_type')
+                          .errors?.required
+                      "
+                    >
+                      Please select vendor type
+                    </mat-error>
+                  </mat-form-field>
+
+                  <div
+                    class="d-flex cta-container"
+                    (click)="popProductConfiguration(i)"
+                  >
+                    <svg
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                      class="icon ml-2 mt-3"
+                    >
+                      <circle
+                        cx="12"
+                        cy="12"
+                        r="11"
+                        stroke="#FF2020"
+                        stroke-width="2"
+                      />
+                      <path
+                        d="M17 11H7C6.44772 11 6 11.4477 6 12C6 12.5523 6.44772 13 7 13H17C17.5523 13 18 12.5523 18 12C18 11.4477 17.5523 11 17 11Z"
+                        fill="#FF2020"
+                      />
+                    </svg>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          class="d-flex flex-wrap justify-content-between align-items-center"
+        >
+          <div
+            class="d-flex cta-container"
+            matRipple
+            (click)="pushProductConfiguration()"
+          >
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              class="icon"
+            >
+              <path d="M17 12H7" stroke="#AF582A" stroke-linecap="round" />
+              <path d="M12 17V7" stroke="#AF582A" stroke-linecap="round" />
+              <path
+                fill-rule="evenodd"
+                clip-rule="evenodd"
+                d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z"
+                stroke="#AF582A"
+              />
+            </svg>
+
+            <div class="ml-2 text1">Add Field</div>
+          </div>
+          <button
+            mat-flat-button
+            type="submit"
+            class="add-product-configuration-btn btn"
+            color="primary"
+            [disabled]="addProductConfigurationsForm.invalid"
+          >
+            Add
+          </button>
+        </div>
+      </form>
+    </div>
+  </section>
+</mat-dialog-content>

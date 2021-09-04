@@ -1,0 +1,13 @@
+@import "colors";
+
+.light-mode {
+  @each $name, $color in $colors {
+    #{$name}: nth($color, 1);
+  }
+}
+
+.dark-mode {
+  @each $name, $color in $colors {
+    #{$name}: nth($color, 2);
+  }
+}

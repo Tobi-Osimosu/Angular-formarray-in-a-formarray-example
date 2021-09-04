@@ -1,0 +1,109 @@
+/* You can add global styles to this file, and also import other style files */
+@import "./app/@core/styles/colors";
+@import "./app/@core/styles/theme";
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+
+  &::selection {
+    color: #ffffff;
+    background: var(--primary-color);
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-family: "Work Sans", sans-serif;
+  background: var(--general);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 9.5px;
+  height: 9.5px;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 8px;
+  // background-color: #ccc;
+  background-color: var(--primary-color);
+  border: 1.5px solid transparent;
+  background-clip: content-box;
+}
+
+/************************Make theme transitions smooth************************/
+// body,
+// .animate-colors-transition * {
+//   transition: color 0.3s, background 0.3s, background-color 0.3s ease-in-out;
+//   -webkit-transition: color 0.3s, background 0.3s,
+//     background-color 0.3s ease-in-out;
+//   -moz-transition: color 0.3s, background 0.3s,
+//     background-color 0.3s ease-in-out;
+//   -ms-transition: color 0.3s, background 0.3s, background-color 0.3s ease-in-out;
+//   -o-transition: color 0.3s, background 0.3s, background-color 0.3s ease-in-out;
+// }
+/******************************************************************************/
+
+/************************No highlight or select on click************************/
+.no-select {
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Old versions of Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Non-prefixed version, currently
+                                supported by Chrome, Edge, Opera and Firefox */
+}
+/*******************************************************************************/
+
+/******************Make arrow on input type number to disappear******************/
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+/********************************************************************************/
+
+.notification-success {
+  background: var(--primary-color) !important;
+  font-weight: 500 !important;
+  color: #ffffff !important;
+}
+
+.notification-danger {
+  background: #ff2020 !important;
+  font-weight: 500 !important;
+  color: #ffffff !important;
+}
+
+/********************************************************************************/
+.light-mode .mat-form-field-appearance-outline .mat-form-field-outline {
+  color: rgba(152, 157, 179, 0.2);
+}
+
+.mat-form-field-appearance-outline .mat-form-field-outline-start {
+  border-radius: 8px 0 0 8px !important;
+}
+
+.mat-form-field-appearance-outline .mat-form-field-outline-end {
+  border-radius: 0 8px 8px 0 !important;
+}
+
+.mat-form-field-appearance-outline .mat-form-field-outline-start,
+.mat-form-field-appearance-outline .mat-form-field-outline-end {
+  min-width: 8px !important;
+}
+/********************************************************************************/

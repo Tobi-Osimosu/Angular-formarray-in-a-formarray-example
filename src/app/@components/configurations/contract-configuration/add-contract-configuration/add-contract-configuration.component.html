@@ -1,0 +1,737 @@
+<section id="add-contract-configuration">
+  <div class="add-contract-configuration-grid">
+    <div class="summary-container">
+      <div class="tab-container no-select">
+        <div matRipple class="tab-header">
+          <p class="tab-text">
+            <ng-container
+              *ngIf="
+                addContractConfigurationFormControls.contract_type.value !==
+                  null &&
+                  addContractConfigurationFormControls.contract_type.value !==
+                    '';
+                else noContractType
+              "
+            >
+              {{ addContractConfigurationFormControls.contract_type.value }}
+            </ng-container>
+            <ng-template #noContractType> Contract type </ng-template>
+          </p>
+          <div class="tab-cta">--</div>
+        </div>
+
+        <div class="tab-content-container">
+          <div class="tab-content">
+            <div class="info-container">
+              <p class="info-name">Organization Signatories</p>
+              <p class="info-value">
+                {{
+                  addContractConfigurationFormControls
+                    .no_of_organization_signatories.value
+                }}
+              </p>
+            </div>
+            <div class="info-container">
+              <p class="info-name">Third Party Signatories</p>
+              <p class="info-value">
+                {{
+                  addContractConfigurationFormControls
+                    .no_of_third_party_signatories.value
+                }}
+              </p>
+            </div>
+            <div class="info-container">
+              <p class="info-name">Witness Signatories</p>
+              <p class="info-value">
+                {{
+                  addContractConfigurationFormControls.no_of_witness_signatories
+                    .value
+                }}
+              </p>
+            </div>
+            <div class="info-container">
+              <p class="contract-name">{{ contractFilename }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <ng-container
+        *ngFor="
+          let phase of addContractConfigurationForm.value.phase;
+          let i = index
+        "
+      >
+        <div class="tab-container no-select">
+          <div
+            matRipple
+            class="tab-header"
+            (click)="manageDynamicAccordions($event)"
+          >
+            <p class="tab-text">
+              <ng-container
+                *ngIf="
+                  addContractConfigurationForm.value.phase.length !== 0 &&
+                    addContractConfigurationForm.value.phase !== null;
+                  else noPhase
+                "
+              >
+                Phase {{ i + 1 }}
+              </ng-container>
+              <ng-template #noPhase> Phase details </ng-template>
+            </p>
+            <div class="tab-cta">--</div>
+          </div>
+
+          <div class="tab-content-container">
+            <div class="tab-content">
+              <div class="info-container">
+                <p class="info-name">{{ phase.phase_name }}</p>
+              </div>
+              <div class="info-container">
+                <p class="info-name">{{ phase.user_category }}</p>
+              </div>
+              <div class="info-container">
+                <p class="info-name">{{ phase.user_notification_type }}</p>
+              </div>
+
+              <div
+                matRipple
+                class="tab-subheader"
+              >
+                <p class="tab-subheader-text">Worflow</p>
+                <div class="tab-cta">--</div>
+              </div>
+
+              <div class="tab-subheader-content-container">
+                <div class="tab-subheader-content">
+                  <ng-container
+                    *ngFor="
+                      let workflow of addContractConfigurationForm.value.phase[
+                        i
+                      ].workflow;
+                      let j = index
+                    "
+                  >
+                    <div class="subheader-info-container">
+                      <p class="subheader-info-name">
+                        {{ workflow.user_role }}
+                      </p>
+                    </div>
+                  </ng-container>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+
+    <div class="container-fluid content d-flex flex-column">
+      <h1 class="header">Contract Type Configuration</h1>
+      <p class="subheader">
+        Customize your organization’s contract, phases and work flow levels in
+        each phase
+      </p>
+
+      <form [formGroup]="addContractConfigurationForm" (ngSubmit)="onSubmit()">
+        <ng-container *ngIf="activePage === 1">
+          <div class="page1-container">
+            <h3 class="title">Contract type</h3>
+            <div class="form-group input-style1">
+              <mat-form-field appearance="outline" [style.width.%]="100">
+                <input
+                  matInput
+                  placeholder="Ex: NDA"
+                  formControlName="contract_type"
+                  type="text"
+                />
+              </mat-form-field>
+            </div>
+
+            <div class="divider divider-margin1"></div>
+
+            <h3 class="title">Contract Settings</h3>
+            <div class="setting-row mb-5 mb-md-0">
+              <div #settingContainer1 class="setting-container">
+                <p class="setting-text">
+                  Does this contract require signatories in my organization?
+                </p>
+
+                <mat-slide-toggle
+                  class="example-margin"
+                  color="primary"
+                  matTooltipPosition="above"
+                  matTooltipClass="custom-tooltip"
+                  (change)="onToggleSetting(1, $event)"
+                >
+                  <!-- [matTooltip]="row.status === 0 ? 'Disable' : 'Enable'" -->
+                  <!-- [checked]="row.status === 0 ? 'true' : 'false'" -->
+                </mat-slide-toggle>
+              </div>
+
+              <div class="setting-input-field input-style2">
+                <mat-form-field appearance="outline" [style.width.%]="100">
+                  <mat-label>Number of signatories</mat-label>
+                  <input
+                    type="number"
+                    matInput
+                    formControlName="no_of_organization_signatories"
+                  />
+                  <mat-error
+                    *ngIf="
+                      addContractConfigurationFormControls
+                        .no_of_organization_signatories.invalid
+                    "
+                  >
+                    {{ getErrorMessage("no_of_organization_signatories") }}
+                  </mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+
+            <div class="setting-row mb-5 mb-md-0">
+              <div #settingContainer2 class="setting-container">
+                <p class="setting-text">
+                  Does this contract require third party signatories?
+                </p>
+
+                <mat-slide-toggle
+                  class="example-margin"
+                  color="primary"
+                  matTooltipPosition="above"
+                  matTooltipClass="custom-tooltip"
+                  (change)="onToggleSetting(2, $event)"
+                >
+                  <!-- [matTooltip]="row.status === 0 ? 'Disable' : 'Enable'" -->
+                  <!-- [checked]="row.status === 0 ? 'true' : 'false'" -->
+                </mat-slide-toggle>
+              </div>
+
+              <div class="setting-input-field input-style2">
+                <mat-form-field appearance="outline" [style.width.%]="100">
+                  <mat-label>Number of signatories</mat-label>
+                  <input
+                    type="number"
+                    matInput
+                    formControlName="no_of_third_party_signatories"
+                  />
+                  <mat-error
+                    *ngIf="
+                      addContractConfigurationFormControls
+                        .no_of_third_party_signatories.invalid
+                    "
+                  >
+                    {{ getErrorMessage("no_of_third_party_signatories") }}
+                  </mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+
+            <div class="setting-row mb-5 mb-md-0">
+              <div #settingContainer3 class="setting-container">
+                <p class="setting-text">
+                  Does this contract require witness signatories?
+                </p>
+
+                <mat-slide-toggle
+                  class="example-margin"
+                  color="primary"
+                  matTooltipPosition="above"
+                  matTooltipClass="custom-tooltip"
+                  (change)="onToggleSetting(3, $event)"
+                >
+                  <!-- [matTooltip]="row.status === 0 ? 'Disable' : 'Enable'" -->
+                  <!-- [checked]="row.status === 0 ? 'true' : 'false'" -->
+                </mat-slide-toggle>
+              </div>
+
+              <div class="setting-input-field input-style2">
+                <mat-form-field appearance="outline" [style.width.%]="100">
+                  <mat-label>Number of signatories</mat-label>
+                  <input
+                    type="number"
+                    matInput
+                    formControlName="no_of_witness_signatories"
+                  />
+                  <mat-error
+                    *ngIf="
+                      addContractConfigurationFormControls
+                        .no_of_witness_signatories.invalid
+                    "
+                  >
+                    {{ getErrorMessage("no_of_witness_signatories") }}
+                  </mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+
+            <div class="divider divider-margin2"></div>
+
+            <h3 class="title">Upload Template</h3>
+
+            <div class="file-upload-border">
+              <p class="file-upload-text">Files should be Doc</p>
+
+              <div class="file-upload-cta-container">
+                <button
+                  matRipple
+                  type="button"
+                  class="btn file-upload-btn"
+                  (click)="contractUpload.click()"
+                >
+                  Browse
+                </button>
+
+                <!-- accept="image/*" -->
+                <input
+                  #contractUpload
+                  type="file"
+                  name=""
+                  class="d-none"
+                  (change)="onUploadContract($event, 'contract')"
+                />
+
+                <div class="file-details">
+                  <p class="file-name">{{ contractFilename }}</p>
+                  <div class="file-size">
+                    ({{ contractFileSize / 1000 | number }}KB)
+                  </div>
+                </div>
+
+                <button matRipple type="button" class="btn preview-btn">
+                  Preview
+                </button>
+
+                <div
+                  class="btn remove-file-upload-icon-container"
+                  matRipple
+                  (click)="onRemoveContract()"
+                >
+                  <img
+                    src="/assets/images/cancel-icon.svg"
+                    alt=""
+                    class="img-fluid remove-file-upload-icon"
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div
+              class="
+                cta-btn-container
+                justify-content-center justify-content-md-end
+              "
+            >
+              <button type="button" matRipple class="btn stroked-btn">
+                Cancel
+              </button>
+              <button
+                type="button"
+                matRipple
+                class="btn primary-btn"
+                (click)="selectActivePage(2)"
+              >
+                Next
+              </button>
+            </div>
+          </div>
+        </ng-container>
+
+        <ng-container *ngIf="activePage === 2">
+          <div class="page2-container">
+            <!-- let phase of phaseFormArray.controls; -->
+
+            <div
+              formArrayName="phase"
+              *ngFor="
+                let phase of addContractConfigurationForm.get('phase')[
+                  'controls'
+                ];
+                let i = index
+              "
+            >
+              <div [formGroupName]="i">
+                <div class="divider divider-margin1 mt-0"></div>
+                <h3 class="title">Create Workflow Phase {{ i + 1 }}</h3>
+
+                <div class="form-group input-style2">
+                  <mat-form-field appearance="outline" [style.width.%]="100">
+                    <mat-label>Phase Name</mat-label>
+                    <input
+                      matInput
+                      placeholder="Ex: Draft"
+                      formControlName="phase_name"
+                      type="text"
+                    />
+                    <mat-error
+                      *ngIf="
+                        phaseFormArray.controls[i].get('phase_name').errors
+                          ?.required
+                      "
+                    >
+                      Please enter phase name
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+
+                <h3 class="title">Contract Settings (Phase {{ i + 1 }})</h3>
+
+                <p class="phase-option-question">
+                  What category of users would be required in this workflow
+                  phase?
+                </p>
+
+                <mat-radio-group
+                  (change)="onPhaseOptionChange1($event, i)"
+                  aria-label="Select an option"
+                  formControlName="user_category"
+                >
+                  <div class="phase-option-grid">
+                    <div #internalUsersOption class="phase-option">
+                      <p class="phase-option-text">Internal users</p>
+
+                      <mat-radio-button
+                        color="primary"
+                        value="internal users"
+                      ></mat-radio-button>
+                    </div>
+
+                    <div #externalUsersOption class="phase-option">
+                      <p class="phase-option-text">External users</p>
+
+                      <mat-radio-button
+                        color="primary"
+                        value="external users"
+                      ></mat-radio-button>
+                    </div>
+                  </div>
+                </mat-radio-group>
+
+                <p class="phase-option-question">
+                  How would you like to notify your users?
+                </p>
+
+                <mat-radio-group
+                  (change)="onPhaseOptionChange2($event, i)"
+                  aria-label="Select an option"
+                  formControlName="user_notification_type"
+                >
+                  <div class="phase-option-grid">
+                    <div #sequentialOption class="phase-option">
+                      <p class="phase-option-text">Sequential</p>
+
+                      <mat-radio-button
+                        color="primary"
+                        value="sequential"
+                      ></mat-radio-button>
+                    </div>
+
+                    <div #nonSequentialOption class="phase-option">
+                      <p class="phase-option-text">Non-sequential</p>
+
+                      <mat-radio-button
+                        color="primary"
+                        value="non-sequential"
+                      ></mat-radio-button>
+                    </div>
+                  </div>
+                </mat-radio-group>
+
+                <div
+                  class="
+                    d-flex
+                    align-items-center
+                    justify-content-center justify-content-md-end
+                    mb-3
+                  "
+                >
+                  <div
+                    class="d-flex cta-container"
+                    (click)="popPhase(i)"
+                    matRipple
+                  >
+                    <svg
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                      class="icon ml-2"
+                    >
+                      <circle
+                        cx="12"
+                        cy="12"
+                        r="11"
+                        stroke="#FF2020"
+                        stroke-width="2"
+                      />
+                      <path
+                        d="M17 11H7C6.44772 11 6 11.4477 6 12C6 12.5523 6.44772 13 7 13H17C17.5523 13 18 12.5523 18 12C18 11.4477 17.5523 11 17 11Z"
+                        fill="#FF2020"
+                      />
+                    </svg>
+
+                    <div class="ml-2 cta-text-danger no-select">
+                      Remove Phase {{ i + 1 }}
+                    </div>
+                  </div>
+                </div>
+
+                <!-- <div class="form-row padding">
+                  <div class="col-12 col-lg-6">
+                    <div class="form-group">
+                      <mat-form-field
+                        appearance="outline"
+                        [style.width.%]="100"
+                      >
+                        <mat-label>Phase Name</mat-label>
+                        <input
+                          matInput
+                          type="text"
+                          formControlName="phase_name"
+                        />
+                        <mat-error
+                          *ngIf="
+                            phaseFormArray.controls[i].get('phase_name').errors
+                              ?.required
+                          "
+                        >
+                          Please enter phase first name
+                        </mat-error>
+                      </mat-form-field>
+                    </div>
+                  </div>
+                </div> -->
+              </div>
+            </div>
+
+            <div
+              class="
+                cta-btn-container
+                justify-content-center justify-content-md-end
+              "
+            >
+              <button
+                type="button"
+                matRipple
+                class="btn stroked-btn"
+                (click)="activePage = 1"
+              >
+                Back
+              </button>
+              <button
+                type="button"
+                matRipple
+                class="btn primary-btn"
+                (click)="pushPhase()"
+              >
+                Create another phase
+              </button>
+              <button
+                type="button"
+                matRipple
+                class="btn primary-btn"
+                (click)="selectActivePage(3)"
+              >
+                Next
+              </button>
+            </div>
+          </div>
+        </ng-container>
+
+        <ng-container *ngIf="activePage === 3">
+          <div class="page3-container">
+            <div
+              formArrayName="phase"
+              *ngFor="
+                let phase of addContractConfigurationForm.get('phase')[
+                  'controls'
+                ];
+                let i = index
+              "
+            >
+              <div [formGroupName]="i">
+                <div class="divider divider-margin1"></div>
+                <h3 class="title">Workflow Levels (Phase {{ i + 1 }})</h3>
+
+                <div
+                  formArrayName="workflow"
+                  *ngFor="
+                    let workflow of phaseFormArray.controls[i].get('workflow')[
+                      'controls'
+                    ];
+                    let j = index
+                  "
+                >
+                  <div [formGroupName]="j">
+                    <div class="workflow-level-form-grid">
+                      <div class="form-group input-style2">
+                        <mat-form-field
+                          appearance="outline"
+                          [style.width.%]="100"
+                        >
+                          <mat-label>User Role ({{ j + 1 }})</mat-label>
+                          <input
+                            matInput
+                            placeholder="Ex: Procurement"
+                            formControlName="user_role"
+                            type="text"
+                          />
+                          <mat-error
+                            *ngIf="
+                              phaseFormArray.controls[i]
+                                .get('workflow')
+                                .controls[j].get('user_role').errors?.required
+                            "
+                          >
+                            Please enter user role
+                          </mat-error>
+                        </mat-form-field>
+                      </div>
+                      <div class="form-group input-style2">
+                        <mat-form-field
+                          appearance="outline"
+                          [style.width.%]="100"
+                        >
+                          <mat-label>Action ({{ j + 1 }})</mat-label>
+                          <mat-select formControlName="action">
+                            <mat-option value="Signature">Signature</mat-option>
+                            <mat-option value="Signature">Signature</mat-option>
+                            <mat-option value="Signature">Signature</mat-option>
+                            <mat-option value="Signature">Signature</mat-option>
+                          </mat-select>
+                          <mat-error
+                            *ngIf="
+                              phaseFormArray.controls[i]
+                                .get('workflow')
+                                .controls[j].get('action').errors?.required
+                            "
+                          >
+                            Please select action
+                          </mat-error>
+                        </mat-form-field>
+                      </div>
+                      <div class="form-group input-style2">
+                        <mat-form-field
+                          appearance="outline"
+                          [style.width.%]="100"
+                        >
+                          <mat-label>Rank ({{ j + 1 }})</mat-label>
+                          <input
+                            matInput
+                            placeholder="Ex: 1"
+                            formControlName="rank"
+                            type="number"
+                          />
+                          <mat-error
+                            *ngIf="
+                              phaseFormArray.controls[i]
+                                .get('workflow')
+                                .controls[j].get('rank').errors?.required
+                            "
+                          >
+                            Please enter rank
+                          </mat-error>
+                        </mat-form-field>
+                      </div>
+
+                      <div
+                        class="d-flex cta-container"
+                        (click)="popWorkflow(i, j)"
+                      >
+                        <svg
+                          width="24"
+                          height="24"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                          class="icon ml-2 mt-3"
+                        >
+                          <circle
+                            cx="12"
+                            cy="12"
+                            r="11"
+                            stroke="#FF2020"
+                            stroke-width="2"
+                          />
+                          <path
+                            d="M17 11H7C6.44772 11 6 11.4477 6 12C6 12.5523 6.44772 13 7 13H17C17.5523 13 18 12.5523 18 12C18 11.4477 17.5523 11 17 11Z"
+                            fill="#FF2020"
+                          />
+                        </svg>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- <button
+                  type="button"
+                  class="btn primary-btn"
+                  (click)="pushWorkflow(i)"
+                >
+                  add workflow level (Phase {{ i + 1 }})
+                </button> -->
+
+                <div
+                  class="d-flex cta-container"
+                  matRipple
+                  (click)="pushWorkflow(i)"
+                >
+                  <svg
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="icon"
+                  >
+                    <path
+                      d="M17 12H7"
+                      stroke="#AF582A"
+                      stroke-linecap="round"
+                    />
+                    <path
+                      d="M12 17V7"
+                      stroke="#AF582A"
+                      stroke-linecap="round"
+                    />
+                    <path
+                      fill-rule="evenodd"
+                      clip-rule="evenodd"
+                      d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z"
+                      stroke="#AF582A"
+                    />
+                  </svg>
+
+                  <div class="ml-2 cta-text no-select">
+                    Add workflow level for (Phase {{ i + 1 }})
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div
+              class="
+                cta-btn-container
+                justify-content-center justify-content-md-end
+              "
+            >
+              <button
+                matRipple
+                type="button"
+                class="btn stroked-btn"
+                (click)="activePage = 2"
+              >
+                Back
+              </button>
+              <button matRipple type="submit" class="btn primary-btn">
+                Done
+              </button>
+            </div>
+          </div>
+        </ng-container>
+      </form>
+    </div>
+  </div>
+</section>

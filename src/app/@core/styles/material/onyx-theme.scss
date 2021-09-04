@@ -1,0 +1,39 @@
+@import "~@angular/material/theming";
+@import "../colors";
+
+@include mat-core();
+
+$Onyx-primary: mat-palette($mat-onyx-brown, 500);
+$Onyx-accent: mat-palette($mat-onyx-accent, 500);
+$Onyx-warn: mat-palette($mat-onyx-red, 500);
+
+$Ruby-light-theme: mat-light-theme(
+  (
+    color: (
+      primary: $Onyx-primary,
+      accent: $Onyx-accent,
+      warn: $Onyx-warn,
+    ),
+  )
+);
+
+$Ruby-dark-theme: mat-dark-theme(
+  (
+    color: (
+      primary: $Onyx-primary,
+      accent: $Onyx-accent,
+      warn: $Onyx-warn,
+    ),
+  )
+);
+
+/* This will disable the style duplication warning */
+$mat-theme-ignore-duplication-warnings: true;
+/**************************************************/
+.light-mode {
+  @include angular-material-theme($Ruby-light-theme);
+}
+
+.dark-mode {
+  @include angular-material-theme($Ruby-dark-theme);
+}

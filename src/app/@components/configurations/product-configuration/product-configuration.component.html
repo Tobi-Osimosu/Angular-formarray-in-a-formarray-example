@@ -1,0 +1,366 @@
+<section id="product-configuration">
+  <div class="product-configuration-grid">
+    <div class="tab-container">
+      <div
+        #tab
+        class="tab active"
+        matRipple
+        (click)="selectActiveTab(1, $event)"
+      >
+        Vendor Type
+      </div>
+      <div #tab class="tab" matRipple (click)="selectActiveTab(2, $event)">
+        Product and Service Type
+      </div>
+      <div #tab class="tab" matRipple (click)="selectActiveTab(3, $event)">
+        Payment Terms
+      </div>
+    </div>
+
+    <div class="container-fluid content d-flex flex-column">
+      <h1 class="header">Product Configuration</h1>
+      <ng-container *ngIf="activeTab === 1">
+        <div class="tab-content1">
+          <p class="subheader">
+            Set up your vendor type for the product and service
+          </p>
+
+          <div class="border-container">
+            <h3 class="title">Vendor type</h3>
+
+            <form [formGroup]="addVendorForm" (ngSubmit)="addVendorType()">
+              <div class="form-grid">
+                <div class="form-group">
+                  <mat-form-field appearance="outline" [style.width.%]="100">
+                    <input
+                      matInput
+                      placeholder="Ex: Business Services"
+                      formControlName="vendor_type"
+                      type="text"
+                    />
+                  </mat-form-field>
+                </div>
+                <div class="form-group">
+                  <button
+                    type="submit"
+                    class="btn add-btn"
+                    [disabled]="
+                      addVendorFormControls.vendor_type.value === null ||
+                      addVendorFormControls.vendor_type.value === ''
+                    "
+                  >
+                    <img
+                      src="/assets/images/add-icon.svg"
+                      alt=""
+                      class="img-fluid"
+                    />
+                  </button>
+                </div>
+              </div>
+            </form>
+
+            <div
+              *ngIf="allVendorTypes.length !== 0"
+              class="all-vendor-types-container"
+            >
+              <ng-container
+                *ngFor="let vendorType of allVendorTypes; let i = index"
+              >
+                <div class="vendor-type no-select">
+                  <p class="vendor-type-text">{{ vendorType }}</p>
+                  <img
+                    src="/assets/images/cancel-icon.svg"
+                    alt=""
+                    class="img-fluid vendor-type-remove-icon"
+                    (click)="removeVendorType(i)"
+                  />
+                </div>
+              </ng-container>
+            </div>
+          </div>
+
+          <div
+            class="
+              d-flex
+              align-items-center
+              justify-content-center justify-content-md-end
+            "
+          >
+            <button
+              [disabled]="allVendorTypes.length === 0"
+              class="btn save-btn"
+            >
+              Save
+            </button>
+          </div>
+        </div>
+      </ng-container>
+
+      <ng-container *ngIf="activeTab === 2">
+        <div class="tab-content2">
+          <p class="subheader">List of all available products</p>
+          <h3 class="title mt-4">Product/Service type</h3>
+          <div class="d-flex align-items-center justify-content-end">
+            <button
+              class="btn add-product-btn"
+              (click)="onAddProductConfiguartion()"
+            >
+              Add Product
+            </button>
+          </div>
+
+          <div class="card-section container-fluid">
+            <div class="row align-items-center">
+              <div class="col-12 col-lg-8">
+                <h5 class="card-section-header">Product List</h5>
+              </div>
+              <div class="col-12 col-lg-4 search">
+                <mat-form-field appearance="outline">
+                  <svg
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                    matPrefix
+                    class="img-fluid search-icon"
+                  >
+                    <path
+                      d="M23.7068 22.2928L17.7378 16.3238C19.3644 14.3344 20.1642 11.7959 19.9716 9.23334C19.7791 6.67081 18.609 4.28031 16.7034 2.5563C14.7977 0.832292 12.3024 -0.0933258 9.73342 -0.029094C7.16447 0.0351378 4.71848 1.08431 2.9014 2.9014C1.08431 4.71848 0.0351378 7.16447 -0.029094 9.73342C-0.0933258 12.3024 0.832292 14.7977 2.5563 16.7034C4.28031 18.609 6.67081 19.7791 9.23334 19.9716C11.7959 20.1642 14.3344 19.3644 16.3238 17.7378L22.2928 23.7068C22.4814 23.8889 22.734 23.9897 22.9962 23.9875C23.2584 23.9852 23.5092 23.88 23.6946 23.6946C23.88 23.5092 23.9852 23.2584 23.9875 22.9962C23.9897 22.734 23.8889 22.4814 23.7068 22.2928ZM9.99978 17.9998C8.41753 17.9998 6.87081 17.5306 5.55522 16.6515C4.23963 15.7725 3.21425 14.5231 2.60875 13.0612C2.00324 11.5994 1.84482 9.99091 2.1535 8.43906C2.46218 6.88721 3.22411 5.46175 4.34293 4.34293C5.46175 3.22411 6.88721 2.46218 8.43906 2.1535C9.99091 1.84482 11.5994 2.00324 13.0612 2.60875C14.5231 3.21425 15.7725 4.23963 16.6515 5.55522C17.5306 6.87081 17.9998 8.41753 17.9998 9.99978C17.9974 12.1208 17.1538 14.1542 15.654 15.654C14.1542 17.1538 12.1208 17.9974 9.99978 17.9998Z"
+                      fill="#C4C4C4"
+                    />
+                  </svg>
+
+                  <input
+                    matInput
+                    type="text"
+                    (keyup)="search($event)"
+                    placeholder="Search Products"
+                    #input
+                  />
+                </mat-form-field>
+              </div>
+            </div>
+
+            <ng-container *ngIf="dataSource !== null; else noTableData">
+              <div class="table-responsive">
+                <table mat-table [dataSource]="dataSource" matSort>
+                  <!-- ID Column -->
+                  <ng-container matColumnDef="id">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                      ID
+                    </th>
+                    <td mat-cell *matCellDef="let row">{{ row.id }}</td>
+                  </ng-container>
+
+                  <!-- Progress Column -->
+                  <ng-container matColumnDef="progress">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                      Progress
+                    </th>
+                    <td mat-cell *matCellDef="let row">{{ row.progress }}%</td>
+                  </ng-container>
+
+                  <!-- Name Column -->
+                  <ng-container matColumnDef="name">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                      Name
+                    </th>
+                    <td mat-cell *matCellDef="let row">{{ row.name }}</td>
+                  </ng-container>
+
+                  <!-- Fruit Column -->
+                  <ng-container matColumnDef="actions">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                      Actions
+                    </th>
+                    <td mat-cell *matCellDef="let row">
+                      <div class="d-flex align-items-center">
+                        <div
+                          class="table-cta-container mr-2"
+                          matRipple
+                          (click)="onEdit(row)"
+                        >
+                          <svg
+                            matTooltip="Edit"
+                            matTooltipPosition="above"
+                            matTooltipClass="custom-tooltip"
+                            width="22"
+                            height="21"
+                            viewBox="0 0 22 21"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              d="M16.3334 11.8333V18.5H3V3.5H11.3333"
+                              stroke="#464748"
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                              class="table-cta"
+                            />
+                            <path
+                              fill-rule="evenodd"
+                              clip-rule="evenodd"
+                              d="M14.8153 3.76834C15.5963 2.98729 16.8627 2.98729 17.6437 3.76834L17.7319 3.85658C18.513 4.63763 18.513 5.90396 17.7319 6.68501L10.2528 14.1642C9.87771 14.5392 9.369 14.75 8.83856 14.75L6.75033 14.75L6.75033 12.6617C6.75033 12.1313 6.96104 11.6226 7.33611 11.2475L14.8153 3.76834Z"
+                              stroke="#464748"
+                              class="table-cta"
+                            />
+                            <path
+                              d="M14.042 4.54163L16.9587 7.45829"
+                              stroke="#464748"
+                              class="table-cta"
+                            />
+                          </svg>
+                        </div>
+                        <div
+                          class="table-cta-container mr-2"
+                          matRipple
+                          (click)="onDelete(row)"
+                        >
+                          <svg
+                            matTooltip="Delete"
+                            matTooltipPosition="above"
+                            matTooltipClass="custom-tooltip"
+                            width="20"
+                            height="20"
+                            viewBox="0 0 20 20"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              d="M15.8333 4.99996H4.16663"
+                              stroke="#464748"
+                              stroke-linecap="round"
+                              class="table-cta"
+                            />
+                            <path
+                              d="M11.6667 4.16671H8.33337"
+                              stroke="#464748"
+                              stroke-linecap="round"
+                              class="table-cta"
+                            />
+                            <path
+                              d="M5 8.33337V17.5H15C15 16.6667 15 8.33337 15 8.33337"
+                              stroke="#464748"
+                              stroke-linecap="round"
+                              class="table-cta"
+                            />
+                          </svg>
+                        </div>
+                      </div>
+                    </td>
+                  </ng-container>
+
+                  <tr
+                    mat-header-row
+                    *matHeaderRowDef="displayedColumns; sticky: true"
+                  ></tr>
+                  <tr
+                    mat-row
+                    *matRowDef="let row; columns: displayedColumns"
+                  ></tr>
+
+                  <!-- Row shown when there is no matching data. -->
+                  <tr class="mat-row" *matNoDataRow>
+                    <td class="mat-cell" colspan="4">
+                      No data matching the filter "{{ input.value }}"
+                    </td>
+                  </tr>
+                </table>
+              </div>
+
+              <mat-paginator
+                [pageSizeOptions]="[
+                  5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80,
+                  85, 90, 95, 100
+                ]"
+                showFirstLastButtons
+              ></mat-paginator>
+            </ng-container>
+
+            <ng-template #noTableData>
+              <!-- <app-table-loader></app-table-loader> -->
+            </ng-template>
+          </div>
+        </div>
+      </ng-container>
+
+      <ng-container *ngIf="activeTab === 3">
+        <div class="tab-content3">
+          <p class="subheader">Set up payment range for contract</p>
+
+          <div class="border-container">
+            <h3 class="title">Payment Terms</h3>
+
+            <form
+              [formGroup]="addPaymentTermsForm"
+              (ngSubmit)="addPaymentTerm()"
+            >
+              <div class="form-grid">
+                <div class="form-group">
+                  <mat-form-field appearance="outline" [style.width.%]="100">
+                    <input
+                      matInput
+                      placeholder="Ex: International"
+                      formControlName="payment_term"
+                      type="text"
+                    />
+                  </mat-form-field>
+                </div>
+                <div class="form-group">
+                  <button
+                    type="submit"
+                    class="btn add-btn"
+                    [disabled]="
+                      addPaymentTermsFormControls.payment_term.value === null ||
+                      addPaymentTermsFormControls.payment_term.value === ''
+                    "
+                  >
+                    <img
+                      src="/assets/images/add-icon.svg"
+                      alt=""
+                      class="img-fluid"
+                    />
+                  </button>
+                </div>
+              </div>
+            </form>
+
+            <div
+              *ngIf="allPaymentTerms.length !== 0"
+              class="all-vendor-types-container"
+            >
+              <ng-container
+                *ngFor="let paymentTerm of allPaymentTerms; let i = index"
+              >
+                <div class="vendor-type no-select">
+                  <p class="vendor-type-text">{{ paymentTerm }}</p>
+                  <img
+                    src="/assets/images/cancel-icon.svg"
+                    alt=""
+                    class="img-fluid vendor-type-remove-icon"
+                    (click)="removePaymentTerm(i)"
+                  />
+                </div>
+              </ng-container>
+            </div>
+          </div>
+
+          <div
+            class="
+              d-flex
+              align-items-center
+              justify-content-center justify-content-md-end
+            "
+          >
+            <button
+              [disabled]="allPaymentTerms.length === 0"
+              class="btn save-btn"
+            >
+              Save
+            </button>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+</section>

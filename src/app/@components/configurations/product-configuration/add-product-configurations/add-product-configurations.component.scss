@@ -1,0 +1,154 @@
+#add-product-configuration {
+  .header {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin-bottom: 15px;
+  }
+
+  .close-container {
+    position: relative;
+    cursor: pointer;
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+
+    .line1,
+    .line2 {
+      position: absolute;
+      top: 9px;
+      left: 14.5px;
+      height: 13px;
+      width: 1px;
+      background: black;
+    }
+
+    .line1 {
+      transform: rotate(45deg);
+    }
+
+    .line2 {
+      transform: rotate(-45deg);
+    }
+  }
+
+  ::ng-deep .mat-form-field-appearance-outline .mat-form-field-flex {
+    padding: 1.1em 0.75em 0 0.75em !important;
+  }
+
+  ::ng-deep .mat-form-field-flex > .mat-form-field-infix {
+    padding: 0.65em 0px !important;
+    border-top: none;
+  }
+
+  ::ng-deep .mat-form-field-label-wrapper {
+    top: -1.15em;
+  }
+
+  ::ng-deep
+    .mat-form-field-appearance-outline.mat-form-field-can-float.mat-form-field-should-float
+    .mat-form-field-label {
+    transform: translateY(-0.7em) scale(0.7);
+  }
+
+  ::ng-deep
+    .mat-form-field-appearance-outline.mat-form-field-can-float.mat-form-field-should-float
+    .mat-form-field-outline-gap {
+    border-top-color: unset;
+  }
+
+  ::ng-deep .mat-form-field-label-wrapper > .mat-form-field-label {
+    color: var(--variation2) !important;
+    font-weight: 500 !important;
+    font-size: 14px;
+  }
+
+  //   /* Centering the calendar suffix icon*/
+  //   ::ng-deep .mat-form-field-suffix {
+  //     top: -2.5px !important;
+  //   }
+
+  //   /* Aligning checkbox with it's text */
+  //   ::ng-deep .mat-checkbox-inner-container {
+  //     margin-top: 7px !important;
+  //   }
+
+  /* Change the white to any color ;) */
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus,
+  input:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 30px var(--general) inset !important;
+    -webkit-transition: "color 9999s ease-out, background-color 9999s ease-out";
+    -webkit-transition-delay: 9999s;
+  }
+
+  /* Change font-size and font family of input when autocomplete kicks in*/
+  input:-webkit-autofill::first-line {
+    // font-family: "Poppins", sans-serif !important;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--variation2);
+  }
+
+  input,
+  ::ng-deep .mat-select-value {
+    text-overflow: ellipsis;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--variation2);
+  }
+
+  .add-product-configuration-btn {
+    box-shadow: none;
+    border: none;
+    border-radius: 5px;
+    background: var(--primary-color);
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: 700;
+    padding: 3px 50px;
+  }
+
+  .cta-container {
+    cursor: pointer;
+    padding: 5px 10px;
+    border-radius: 5px;
+  }
+
+  .icon {
+    width: 20px;
+  }
+
+  .text1,
+  .text2 {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    font-weight: 500;
+  }
+
+  .text1 {
+    color: #af582a;
+  }
+
+  .text2 {
+    color: #ff2020;
+  }
+}
+
+::ng-deep .mat-dialog-container {
+  // max-width: 700px;
+  width: 700px !important;
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+
+::ng-deep .light-mode .mat-option {
+  color: var(--variation2);
+}
+
+@media (max-width: 991.98px) {
+  #add-product-configuration {
+  }
+}

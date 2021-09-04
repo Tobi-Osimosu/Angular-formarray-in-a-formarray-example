@@ -1,0 +1,13 @@
+#notification {
+  font-size: 12px !important;
+  color: #ffffff !important;
+
+  .notification-grid {
+    display: grid;
+    grid-template-columns: 11fr 1fr;
+  }
+
+  .icon {
+    cursor: pointer;
+  }
+}
